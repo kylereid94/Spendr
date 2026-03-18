@@ -4,29 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Spendr - Transactions</title>
-    <!--tailwind and daisy-->
+
     <link href="/src/output.css" rel="stylesheet" />
-    <!--fonts-->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Lexend:wght@100..900&display=swap"
       rel="stylesheet"
     />
-    <!--icons-->
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
-    />
+
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
     />
   </head>
   <body class="">
-    <!--main-->
     <div class="grow mt-6 p-6">
-      <!--header-->
       <div class="flex justify-between items-center">
         <h1 class="text-lg font-bold">Transactions</h1>
         <select class="select rounded-full select-sm w-auto">
@@ -44,41 +38,45 @@
           <option>December</option>
         </select>
       </div>
-      <!--buttons-->
+
       <div class="grid grid-cols-2 mt-3 space-x-4">
-        <a class="btn rounded-2xl h-12"
-          ><i class="fi fi-sr-wallet-income pt-1 text-lg"></i>Deposit</a
-        >
-        <a class="btn bg-carbon text-white rounded-2xl h-12"
-          >Withdrawal<i class="fi fi-sr-wallet-arrow pt-1 text-lg"></i
-        ></a>
+        <a class="btn rounded-2xl h-12">
+          <i class="fi fi-sr-wallet-income pt-1 text-lg"></i>Deposit
+        </a>
+        <a class="btn bg-carbon text-white rounded-2xl h-12">
+          Withdrawal<i class="fi fi-sr-wallet-arrow pt-1 text-lg"></i>
+        </a>
       </div>
-      <!--trans list-->
-      <div class="bg-base-200 rounded-2xl p-4 mt-4 space-y-4">
-        <!--placeholder-->
+
+      <!-- trans list -->
+      <div id="transList" class="bg-base-200 rounded-2xl p-4 mt-4 space-y-4">
+        <!-- items will be inserted here -->
+      </div>
+
+      <!-- template -->
+      <template id="transactionTemplate">
         <div class="bg-white p-4 rounded-xl">
           <div class="flex space-x-4 items-center">
             <div
-              class="bg-orange-500 flex items-cetner justify-center p-2 aspect-square rounded-md"
+              class="bg-orange-500 flex items-center justify-center p-2 aspect-square rounded-md"
             >
               <i
-                id="transIcon"
-                class="fi fi-sr-sack-dollar text-3xl text-white"
+                class="fi fi-sr-sack-dollar text-3xl text-white pt-1 transIcon"
               ></i>
             </div>
             <div class="grow">
-              <h1 id="transDesc" class="font-bold">Description</h1>
-              <h2 id="transCat" class="opacity-60 text-sm">Category</h2>
+              <h1 class="font-bold transDesc">Description</h1>
+              <h2 class="opacity-60 text-sm transCat">Category</h2>
             </div>
             <div class="text-right">
-              <h1 id="transAmount" class="text-xl text-darkmint">+$00.00</h1>
-              <h2 id="transDate" class="text-xs opacity-60">--/--/--</h2>
+              <h1 class="text-xl text-darkmint transAmount">+$00.00</h1>
+              <h2 class="text-xs opacity-60 transDate">--/--/--</h2>
             </div>
           </div>
         </div>
-      </div>
+      </template>
     </div>
-    <!--dock-->
+
     <div class="dock">
       <button>
         <i class="fi fi-sr-house-blank"></i>
@@ -97,5 +95,107 @@
         <span class="dock-label">Account</span>
       </button>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script>
+      const { createClient } = supabase;
+
+      const SUPABASE_URL = "https://mpzpdffdloiamoyvwock.supabase.co";
+      const SUPABASE_KEY = "sb_publishable_r9wBzPC3t6JXFTMoc5vS4Q_MCGmIsE3";
+
+      const client = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+      const transList = document.getElementById("transList");
+      const transactionTemplate = document.getElementById(
+        "transactionTemplate",
+      );
+
+      function formatAmount(amount) {
+        const num = Number(amount) || 0;
+        const sign = num >= 0 ? "+" : "-";
+        return `${sign}$${Math.abs(num).toFixed(2)}`;
+      }
+
+      function formatDate(dateString) {
+        if (!dateString) return "--/--/--";
+
+        const date = new Date(dateString);
+        if (isNaN(date)) return dateString;
+
+        return date.toLocaleDateString("en-US", {
+          month: "2-digit",
+          day: "2-digit",
+          year: "2-digit",
+        });
+      }
+
+      function renderTransactions(transactions) {
+        transList.innerHTML = "";
+
+        if (!transactions || transactions.length === 0) {
+          transList.innerHTML = `
+            <div class="bg-white p-4 rounded-xl text-sm opacity-60">
+              No transactions found.
+            </div>
+          `;
+          return;
+        }
+
+        transactions.forEach((transaction) => {
+          const clone = transactionTemplate.content.cloneNode(true);
+
+          clone.querySelector(".transDesc").textContent =
+            transaction.Description || "No description";
+
+          clone.querySelector(".transCat").textContent =
+            transaction.Category || "Uncategorized";
+
+          const amountEl = clone.querySelector(".transAmount");
+          const amount = Number(transaction.Amount) || 0;
+
+          // Set text
+          amountEl.textContent = formatAmount(amount);
+
+          // Remove any existing color classes (important if reused later)
+          amountEl.classList.remove("text-darkmint", "text-error");
+
+          // Apply color based on value
+          if (amount >= 0) {
+            amountEl.classList.add("text-darkmint");
+          } else {
+            amountEl.classList.add("text-error");
+          }
+
+          clone.querySelector(".transDate").textContent = formatDate(
+            transaction.Date,
+          );
+
+          transList.appendChild(clone);
+        });
+      }
+
+      async function loadTransactions() {
+        const { data, error } = await client
+          .from("transactions")
+          .select("*")
+          .order("Date", { ascending: false });
+
+        console.log("DATA:", data);
+        console.log("ERROR:", error);
+
+        if (error) {
+          transList.innerHTML = `
+            <div class="bg-white p-4 rounded-xl text-sm text-red-500">
+              Failed to load transactions.
+            </div>
+          `;
+          return;
+        }
+
+        renderTransactions(data);
+      }
+
+      loadTransactions();
+    </script>
   </body>
 </html>

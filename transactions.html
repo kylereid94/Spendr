@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spendr - Transactions</title>
+    <!--tailwind and daisy-->
+    <link href="/src/output.css" rel="stylesheet" />
+    <!--fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!--icons-->
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+  </head>
+  <body class="">
+    <!--main-->
+    <div class="grow mt-6 p-6">
+      <!--header-->
+      <div class="flex justify-between items-center">
+        <h1 class="text-lg font-bold">Transactions</h1>
+        <select class="select rounded-full select-sm w-auto">
+          <option>January</option>
+          <option>February</option>
+          <option>March</option>
+          <option>April</option>
+          <option>May</option>
+          <option>June</option>
+          <option>July</option>
+          <option>August</option>
+          <option>September</option>
+          <option>October</option>
+          <option>November</option>
+          <option>December</option>
+        </select>
+      </div>
+      <!--buttons-->
+      <div class="grid grid-cols-2 mt-3 space-x-4">
+        <a class="btn rounded-2xl h-12"
+          ><i class="fi fi-sr-wallet-income pt-1 text-lg"></i>Deposit</a
+        >
+        <a class="btn bg-carbon text-white rounded-2xl h-12"
+          >Withdrawal<i class="fi fi-sr-wallet-arrow pt-1 text-lg"></i
+        ></a>
+      </div>
+      <!--trans list-->
+      <div class="bg-base-200 rounded-2xl p-4 mt-4 space-y-4">
+        <!--placeholder-->
+        <div class="bg-white p-4 rounded-xl">
+          <div class="flex space-x-4 items-center">
+            <div
+              class="bg-orange-500 flex items-cetner justify-center p-2 aspect-square rounded-md"
+            >
+              <i
+                id="transIcon"
+                class="fi fi-sr-sack-dollar text-3xl text-white"
+              ></i>
+            </div>
+            <div class="grow">
+              <h1 id="transDesc" class="font-bold">Description</h1>
+              <h2 id="transCat" class="opacity-60 text-sm">Category</h2>
+            </div>
+            <div class="text-right">
+              <h1 id="transAmount" class="text-xl text-darkmint">+$00.00</h1>
+              <h2 id="transDate" class="text-xs opacity-60">--/--/--</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--dock-->
+    <div class="dock">
+      <button>
+        <i class="fi fi-sr-house-blank"></i>
+        <span class="dock-label">Home</span>
+      </button>
+      <button class="dock-active">
+        <i class="fi fi-sr-receipt"></i>
+        <span class="dock-label">Transactions</span>
+      </button>
+      <button>
+        <i class="fi fi-sr-piggy-bank"></i>
+        <span class="dock-label">Savings</span>
+      </button>
+      <button>
+        <i class="fi fi-sr-circle-user"></i>
+        <span class="dock-label">Account</span>
+      </button>
+    </div>
+  </body>
+</html>

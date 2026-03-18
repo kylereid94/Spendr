@@ -1,0 +1,47 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+    --font-lexend: "Lexend";
+    --font-calsans: "Cal Sans";
+    --color-smoke: #F4F4F4;
+    --color-darkmint: #1DCD9F;
+    --color-lightmint: 79, 215, 180;
+    --color-carbon: #222222;
+    --color-ice: #DDFAF2;
+}
+
+body {
+    font-family: var(--font-lexend);
+}
+
+.dock {
+    padding: 0;
+}
+
+button.dock-active {
+    margin-bottom: 0px;
+    border-radius: 0;
+}
+.dock>button {
+    margin-bottom: 0px;
+    border-radius: 0;
+}
+
+.dock>button>i {
+    font-size: 24px;
+    padding-top: 4px;
+    height: 34px;
+    color: var(--color-darkmint);
+}
+
+button.dock-active:after {
+    background-color: rgba(var(--color-lightmint), 1);
+    top: 0px;
+    height: 1px;
+    width: 100%;
+}
+
+button.dock-active {
+    background-color: rgba(var(--color-lightmint),0.3);
+}

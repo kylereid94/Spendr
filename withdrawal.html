@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spendr - Withdrawal</title>
+
+    <link href="src/output.css" rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+  </head>
+  <body class="">
+    <div class="grow mt-6 p-6">
+      <!--header-->
+      <div class="flex justify-between">
+        <div class="flex gap-2 items-center">
+          <a class="btn btn-square btn-sm border-0 bg-smoke"
+            ><i class="fi fi-sr-angle-left pt-1"></i
+          ></a>
+          <h1 class="text-2xl font-bold">Add Withdrawal</h1>
+        </div>
+        <div>
+          <a class="btn btn-circle border-0 bg-darkmint text-white"
+            ><i class="fi fi-sr-check pt-1 text-lg"></i
+          ></a>
+        </div>
+      </div>
+
+      <!--tabs-->
+      <div class="tabBar">
+        <a class="tab tab-active">One Time</a>
+        <a class="tab">Reoccuring</a>
+      </div>
+
+      <!--input form-->
+      <div class="flex flex-col items-center mt-4">
+        <input
+          type="number"
+          class="input w-40 h-12 rounded-full border-0 bg-smoke text-center text-xl"
+          placeholder="$00.00"
+        />
+        <select class="select mt-4 h-12 rounded-lg w-full">
+          <option disabled selected>Category</option>
+          <option disabled>Auto</option>
+          <option>Car Insurance</option>
+          <option>Car Payment</option>
+          <option>Gas</option>
+          <option disabled>Bills</option>
+          <option>Rent</option>
+          <option>Subscription</option>
+          <option>Other Bill</option>
+          <option disabled>Debt</option>
+          <option>Credit Card Payment</option>
+          <option>Layaway</option>
+          <option>Vacation</option>
+          <option disabled>Food</option>
+          <option>Fast Food</option>
+          <option>Groceries</option>
+          <option>Restaurant</option>
+          <option>Vending Machine</option>
+          <option disabled>Shopping</option>
+          <option>Video Games</option>
+          <option>Other Shopping</option>
+        </select>
+        <label class="input w-full h-12 rounded-lg mt-4">
+          <i class="fi fi-sr-edit pt-1 text-xl text-neutral-300"></i>
+          <input type="text" placeholder="Description" />
+        </label>
+      </div>
+    </div>
+
+    <div class="dock">
+      <a class="dock-active" href="index.html">
+        <i class="fi fi-sr-house-blank"></i>
+        <span class="dock-label">Home</span>
+      </a>
+      <a href="transactions.html">
+        <i class="fi fi-sr-receipt"></i>
+        <span class="dock-label">Transactions</span>
+      </a>
+      <a href="savings.html">
+        <i class="fi fi-sr-piggy-bank"></i>
+        <span class="dock-label">Savings</span>
+      </a>
+      <a href="account.html">
+        <i class="fi fi-sr-circle-user"></i>
+        <span class="dock-label">Account</span>
+      </a>
+    </div>
+  </body>
+</html>

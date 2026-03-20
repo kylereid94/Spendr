@@ -24,29 +24,50 @@ body {
     padding: 0;
 }
 
-button.dock-active {
+a.dock-active {
     margin-bottom: 0px;
     border-radius: 0;
 }
-.dock>button {
+.dock>a {
     margin-bottom: 0px;
     border-radius: 0;
 }
 
-.dock>button>i {
+.dock>a>i {
     font-size: 24px;
     padding-top: 4px;
     height: 34px;
     color: var(--color-darkmint);
 }
 
-button.dock-active:after {
+a.dock-active:after {
     background-color: rgba(var(--color-lightmint), 1);
     top: 0px;
     height: 1px;
     width: 100%;
 }
 
-button.dock-active {
+a.dock-active {
     background-color: rgba(var(--color-lightmint),0.3);
+}
+
+.tabBar {
+    padding: 8px;
+    display: flex;
+    height: 55px;
+    background-color: var(--color-smoke);
+    border-radius: var(--radius-xl);
+    gap: 8px;
+    margin-top: 28px;
+}
+
+.tab {
+    border-radius: var(--radius-lg);
+    height: 100%;
+    width: 50%;
+    color: var(--color-carbon);
+}
+
+.tab-active {
+    background-color: white;
 }

@@ -50,9 +50,3 @@ button.dock-active:after {
 button.dock-active {
     background-color: rgba(var(--color-lightmint),0.3);
 }
-
-.calIcon {
-    background-image: url(/assets/calendar.png);
-    background-size: cover;
-    background-position: center;
-}
